@@ -1,0 +1,33 @@
+# Two-agent PraisonAI team as a NeMo Agent Toolkit workflow on a Nemotron NIM.
+#   NVIDIA_API_KEY=... nat run --config_file examples/nemotron_team.yml --input "What day is it and why does it matter?"
+functions:
+  clock:
+    _type: current_datetime
+
+llms:
+  nemotron:
+    _type: nim
+    model_name: nvidia/nemotron-3-super-120b-a12b
+    max_tokens: 2048        # NAT's NIM default is 300
+    temperature: 0.0
+
+workflow:
+  _type: praisonai_team
+  llm_name: nemotron
+  process: sequential
+  agents:
+    - name: researcher
+      role: Researcher
+      instructions: Gather facts; use tools when helpful.
+      tool_names: [clock]
+    - name: writer
+      role: Writer
+      instructions: Turn the research into a concise answer.
+  tasks:
+    - name: research
+      description: Research the user's request.
+      agent: researcher
+    - name: write
+      description: Write the final answer.
+      agent: writer
+      context: [research]
