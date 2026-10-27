@@ -24,6 +24,8 @@ entry point: `nat.plugins` → `nat_praisonai` (NAT's third-party convention).
 NVIDIA_API_KEY=... nat run --config_file examples/nemotron_team.yml --input "What day is it?"
 ```
 
+The example uses `nvidia/nemotron-3.5-lightning-30b-a3b` (some accounts get 404 on Super 120B chat).
+
 ## What it registers
 
 | `_type` / wrapper | Kind | Notes |

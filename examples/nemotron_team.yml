@@ -7,7 +7,8 @@ functions:
 llms:
   nemotron:
     _type: nim
-    model_name: nvidia/nemotron-3-super-120b-a12b
+    # Super 120B may appear in /models but return 404 on chat for some keys; Lightning is verified.
+    model_name: nvidia/nemotron-3.5-lightning-30b-a3b
     max_tokens: 2048        # NAT's NIM default is 300
     temperature: 0.0
 
